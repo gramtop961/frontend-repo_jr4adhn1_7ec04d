@@ -1,140 +1,103 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const Input = ({ label, ...props }) => (
-  <label className="block">
-    <span className="text-sm font-medium text-gray-700">{label}</span>
-    <input {...props} className="mt-1 w-full rounded-xl border border-orange-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white" />
-  </label>
-);
+export function SellerForm() {
+  const [form, setForm] = useState({ name: '', phone: '', shop: '', city: ''});
+  const [status, setStatus] = useState({ state: 'idle', message: ''});
 
-const TextArea = ({ label, ...props }) => (
-  <label className="block">
-    <span className="text-sm font-medium text-gray-700">{label}</span>
-    <textarea {...props} className="mt-1 w-full rounded-xl border border-orange-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white" />
-  </label>
-);
-
-export const SellerForm = () => {
-  const [status, setStatus] = useState(null);
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setStatus(null);
-    setErrors({});
-
-    const form = new FormData(e.currentTarget);
-    const data = Object.fromEntries(form.entries());
-
-    const req = ['brand', 'seller', 'email', 'city'];
-    const errs = {};
-    req.forEach((k) => { if (!data[k]) errs[k] = 'Required'; });
-    if (Object.keys(errs).length) { setErrors(errs); return; }
-
-    setLoading(true);
+    if (!form.name || !form.phone || !form.shop || !form.city) {
+      setStatus({ state: 'error', message: 'Please fill all required fields.'});
+      return;
+    }
     try {
-      const res = await fetch('/api/seller/apply', {
+      setStatus({ state: 'loading', message: ''});
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL || ''}/api/seller/apply`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error('Request failed');
-      setStatus('success');
-      e.currentTarget.reset();
+      if (!res.ok) throw new Error('Failed');
+      setStatus({ state: 'success', message: 'Thank you! We will reach out shortly.'});
+      setForm({ name: '', phone: '', shop: '', city: ''});
     } catch (err) {
-      setStatus('error');
-    } finally {
-      setLoading(false);
+      setStatus({ state: 'error', message: 'Something went wrong. Please try again.'});
     }
   };
 
   return (
-    <section id="seller-form" className="bg-gradient-to-b from-white to-orange-50/60">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-2xl font-bold">Apply to become a seller</h2>
-        <form onSubmit={onSubmit} className="mt-6 grid md:grid-cols-2 gap-4 rounded-2xl p-6 bg-white border border-orange-100 shadow-sm">
-          <Input name="brand" label="Store/Brand Name" placeholder="Eg. Sunny Grocers" />
-          <Input name="seller" label="Seller Name" placeholder="Your full name" />
-          <Input name="email" type="email" label="Email" placeholder="you@example.com" />
-          <Input name="phone" label="Phone (optional)" placeholder="" />
-          <Input name="address" label="Address" placeholder="Street address" />
-          <Input name="city" label="City" placeholder="Your city" />
-          <Input name="zip" label="ZIP" placeholder="Postal code" />
-          <label className="block">
-            <span className="text-sm font-medium text-gray-700">Business Type</span>
-            <select name="type" className="mt-1 w-full rounded-xl border border-orange-200 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500">
-              <option value="Retail">Retail</option>
-              <option value="Home Seller">Home Seller</option>
-              <option value="Creator">Creator</option>
-            </select>
-          </label>
-          <TextArea name="desc" label="Short Description" rows={3} placeholder="What do you sell?" />
-          <Input name="links" label="Links (optional)" placeholder="Website/Instagram/etc" />
-          <label className="flex items-center gap-2 md:col-span-2">
-            <input type="checkbox" name="confirm" className="rounded border-orange-300 text-orange-600 focus:ring-orange-500" required />
-            <span className="text-sm text-gray-700">I confirm the info is accurate</span>
-          </label>
-          <div className="md:col-span-2">
-            <button type="submit" disabled={loading} className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-orange-600 to-rose-500 text-white px-5 py-3 text-sm font-semibold shadow-lg disabled:opacity-60">
-              {loading ? 'Submitting…' : 'Submit application'}
-            </button>
-            {status === 'success' && <span className="ml-3 text-green-700 text-sm">Thanks! We’ll verify and email your login credentials.</span>}
-            {status === 'error' && <span className="ml-3 text-rose-600 text-sm">Something went wrong. Please try again.</span>}
-          </div>
-          <div className="md:col-span-2 grid grid-cols-2 gap-3">
-            {['brand','seller','email','city'].map((k) => errors[k] && (
-              <div key={k} className="text-rose-600 text-xs">{k} is required</div>
-            ))}
-          </div>
-        </form>
+    <section id="seller-apply" className="py-20 bg-slate-50 dark:bg-slate-900">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 p-8 shadow-xl">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Become a Seller</h2>
+          <p className="mt-2 text-slate-600 dark:text-slate-300">Join the hyperlocal marketplace and start getting orders today.</p>
+
+          <form onSubmit={onSubmit} className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="sm:col-span-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">Full Name</label>
+              <input
+                name="name"
+                value={form.name}
+                onChange={onChange}
+                className="mt-1 w-full rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Jane Doe"
+                required
+              />
+            </div>
+            <div className="sm:col-span-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">Phone</label>
+              <input
+                name="phone"
+                value={form.phone}
+                onChange={onChange}
+                className="mt-1 w-full rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="+91 98765 43210"
+                required
+              />
+            </div>
+            <div className="sm:col-span-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">Shop Name</label>
+              <input
+                name="shop"
+                value={form.shop}
+                onChange={onChange}
+                className="mt-1 w-full rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Sunrise Grocers"
+                required
+              />
+            </div>
+            <div className="sm:col-span-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">City</label>
+              <input
+                name="city"
+                value={form.city}
+                onChange={onChange}
+                className="mt-1 w-full rounded-xl border border-slate-300 dark:border-white/10 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Bengaluru"
+                required
+              />
+            </div>
+            <div className="sm:col-span-2 flex items-center justify-between gap-4 mt-2">
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 shadow-lg"
+                disabled={status.state === 'loading'}
+              >
+                {status.state === 'loading' ? 'Submitting...' : 'Apply Now'}
+              </button>
+              {status.state !== 'idle' && (
+                <p className={
+                  status.state === 'success' ? 'text-emerald-600 dark:text-emerald-400 text-sm' : 'text-rose-600 dark:text-rose-400 text-sm'
+                }>
+                  {status.message}
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );
-};
-
-export const CustomerCapture = () => {
-  const [status, setStatus] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setStatus(null);
-    setLoading(true);
-    const form = new FormData(e.currentTarget);
-    const data = Object.fromEntries(form.entries());
-
-    try {
-      const res = await fetch('/api/customer/early', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      if (!res.ok) throw new Error('Request failed');
-      setStatus('success');
-      e.currentTarget.reset();
-    } catch (err) {
-      setStatus('error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16">
-      <div className="rounded-2xl p-6 bg-white border border-orange-100 shadow-sm">
-        <h3 className="text-xl font-semibold">Get early access & local deals</h3>
-        <form onSubmit={onSubmit} className="mt-4 grid md:grid-cols-3 gap-4">
-          <Input name="name" label="Name" placeholder="Your name" />
-          <Input name="email" type="email" label="Email" placeholder="you@example.com" />
-          <Input name="city" label="City" placeholder="Your city" />
-          <div className="md:col-span-3">
-            <button type="submit" disabled={loading} className="inline-flex items-center gap-2 rounded-full bg-orange-600 text-white px-5 py-3 text-sm font-semibold disabled:opacity-60">{loading ? 'Submitting…' : 'You’re in!'}</button>
-            {status === 'success' && <span className="ml-3 text-green-700 text-sm">You’re in! Check your inbox.</span>}
-            {status === 'error' && <span className="ml-3 text-rose-600 text-sm">Something went wrong. Please try again.</span>}
-          </div>
-        </form>
-      </div>
-    </section>
-  );
-};
+}

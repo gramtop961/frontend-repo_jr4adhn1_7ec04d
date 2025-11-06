@@ -1,41 +1,77 @@
-import React from 'react';
 import Spline from '@splinetool/react-spline';
-import { ArrowRight, ShieldCheck, Lock, Download } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
-const Hero = () => {
+export default function Hero() {
+  const scrollToSeller = () => {
+    const el = document.getElementById('seller-apply');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800">
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/WCoEDSwacOpKBjaC/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/70 via-white/40 to-white" />
+        <Spline
+          scene="https://prod.spline.design/igThmltzmqv5hkWo/scene.splinecode"
+          style={{ width: '100%', height: '100%' }}
+        />
       </div>
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur text-orange-700 ring-1 ring-orange-200 text-xs font-medium">
-            <Download size={14}/> iOS & Android
-          </span>
-          <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900">
-            Buy & sell from real people near you
+
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-900/70 to-slate-900/80 pointer-events-none" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 grid md:grid-cols-12 gap-8 items-center">
+        <div className="md:col-span-7 text-white">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs">
+            <Sparkles size={14} className="text-emerald-300" /> Hyperlocal commerce, reimagined
+          </div>
+          <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+            Sell faster. Deliver closer. Grow smarter.
           </h1>
-          <p className="mt-4 text-lg text-gray-700">
-            Discover local stores, home sellers, and creators—place pickup orders today.
+          <p className="mt-4 max-w-xl text-white/80 text-base sm:text-lg">
+            Helloo Local connects neighborhood sellers with nearby customers through a seamless, real‑time marketplace experience.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3" id="get-app">
-            <a href="https://apps.apple.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-orange-600 to-rose-500 text-white px-5 py-3 text-sm font-semibold shadow-lg shadow-orange-200">
-              Get the App <ArrowRight size={16} />
-            </a>
-            <a href="#seller-form" className="inline-flex items-center gap-2 rounded-full border border-orange-300 text-orange-700 px-5 py-3 text-sm font-semibold bg-white/70 backdrop-blur hover:bg-white">
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={scrollToSeller}
+              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30"
+            >
               Become a Seller
+            </button>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.example.helloolocal"
+              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-slate-900 bg-white/90 hover:bg.white"
+            >
+              Get the App
             </a>
           </div>
-          <div className="mt-6 flex items-center gap-6 text-sm text-gray-700">
-            <div className="flex items-center gap-2"><ShieldCheck className="text-green-600" size={18}/> Admin-Verified Sellers</div>
-            <div className="flex items-center gap-2"><Lock className="text-green-600" size={18}/> Privacy-Safe Chat & Video</div>
+          <div className="mt-8 flex items-center gap-6 text-sm text-white/70">
+            <div className="flex -space-x-2">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <img
+                  key={i}
+                  src={`https://i.pravatar.cc/100?img=${i + 5}`}
+                  alt="Happy customer avatar"
+                  className="h-8 w-8 rounded-full ring-2 ring-white/10 object-cover"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+            <p>Trusted by 2,000+ neighborhood sellers</p>
+          </div>
+        </div>
+
+        <div className="md:col-span-5">
+          <div className="relative rounded-3xl bg-gradient-to-br from-emerald-400/20 via-teal-400/10 to-cyan-400/20 p-1 shadow-2xl">
+            <div className="rounded-2xl bg-slate-950/60 border border-white/10 p-4">
+              <img
+                src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop"
+                alt="Helloo Local app preview"
+                className="rounded-2xl shadow-2xl"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}

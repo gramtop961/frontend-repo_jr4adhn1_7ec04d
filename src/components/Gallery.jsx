@@ -1,104 +1,41 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const imagesCustomer = [
-  '/screens/customer-map.jpg',
-  '/screens/customer-store.jpg',
-  '/screens/customer-gallery.jpg',
-  '/screens/customer-order.jpg',
+const screens = [
+  'https://images.unsplash.com/photo-1541150443594-859ccb50f5f6?q=80&w=800&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1550867428-2d51a8779241?q=80&w=800&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1601034913831-d24e511c11c9?q=80&w=800&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=800&auto=format&fit=crop',
 ];
 
-const imagesSeller = [
-  '/screens/seller-orders.jpg',
-  '/screens/seller-add.jpg',
-  '/screens/seller-toggle.jpg',
-  '/screens/seller-reports.jpg',
-];
-
-const Placeholder = ({ label }) => (
-  <div className="relative aspect-[9/19] w-48 sm:w-56 md:w-64 rounded-2xl bg-gradient-to-br from-orange-100 via-rose-100 to-white shadow-lg ring-1 ring-orange-200 overflow-hidden">
-    <div className="absolute inset-0 grid place-items-center text-xs sm:text-sm font-medium text-gray-600">
-      {label}
-    </div>
-  </div>
-);
-
-const Card = ({ src, alt, fallback }) => {
-  if (!src) return <Placeholder label={fallback || 'App Screen'} />;
+export default function Gallery() {
   return (
-    <div className="relative aspect-[9/19] w-48 sm:w-56 md:w-64 rounded-2xl overflow-hidden shadow-xl ring-1 ring-orange-200 bg-white">
-      <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover" />
-    </div>
-  );
-};
-
-const DragCarousel = ({ title, subtitle, items }) => {
-  const constraintsRef = useRef(null);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const el = constraintsRef.current;
-    if (el) {
-      const update = () => setWidth(el.scrollWidth - el.offsetWidth);
-      update();
-      const ro = new ResizeObserver(update);
-      ro.observe(el);
-      return () => ro.disconnect();
-    }
-  }, []);
-
-  return (
-    <div className="rounded-3xl p-6 sm:p-8 bg-white/70 backdrop-blur border border-orange-100 shadow-sm">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h3 className="text-lg sm:text-xl font-semibold">{title}</h3>
-          {subtitle && <p className="text-sm text-gray-600">{subtitle}</p>}
+    <section className="py-20 bg-slate-50 dark:bg-slate-900">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">Experience the app</h2>
+            <p className="mt-2 text-slate-600 dark:text-slate-300">Drag to explore interfaces crafted for speed and clarity.</p>
+          </div>
         </div>
-      </div>
-      <div className="mt-5 overflow-hidden">
-        <motion.div ref={constraintsRef} className="cursor-grab active:cursor-grabbing">
-          <motion.div drag="x" dragConstraints={{ left: -width, right: 0 }} className="flex gap-4">
-            {items.map((it, idx) => (
-              <Card key={idx} src={it.src} alt={it.alt} fallback={it.fallback} />
+        <div className="mt-8 overflow-hidden">
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: -600, right: 0 }}
+            className="flex gap-4 cursor-grab active:cursor-grabbing"
+          >
+            {screens.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`App screen ${i + 1}`}
+                loading="lazy"
+                className="h-80 w-56 sm:h-96 sm:w-64 object-cover rounded-3xl shadow-xl select-none"
+              />
             ))}
           </motion.div>
-        </motion.div>
-      </div>
-    </div>
-  );
-};
-
-export const Gallery = () => {
-  return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-      <h2 className="text-2xl font-bold">App Screens & Video Gallery</h2>
-      <div className="mt-8 grid lg:grid-cols-2 gap-8">
-        <DragCarousel
-          title="Customer App"
-          subtitle="Map, store pages, product galleries, and order flow"
-          items={imagesCustomer.map((src, i) => ({ src, alt: `Customer screen ${i+1}`, fallback: 'Customer Screen' }))}
-        />
-        <DragCarousel
-          title="Seller App"
-          subtitle="Orders, add product, toggle availability, and reports"
-          items={imagesSeller.map((src, i) => ({ src, alt: `Seller screen ${i+1}`, fallback: 'Seller Screen' }))}
-        />
-      </div>
-      <div className="mt-8 rounded-3xl overflow-hidden ring-1 ring-orange-100 bg-white shadow-sm">
-        <div className="aspect-video relative">
-          <iframe
-            className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Helloo Local Explainer"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-white/10 via-transparent to-transparent" />
         </div>
       </div>
     </section>
   );
-};
-
-export default Gallery;
+}
