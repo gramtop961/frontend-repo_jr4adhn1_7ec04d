@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import { Features, HowItWorks, Gallery, SellerApply } from './components/Sections';
+import FeatureCarousel from './components/FeatureCarousel';
+import BottomCTA from './components/BottomCTA';
 
 export default function App() {
   useEffect(() => {
@@ -21,6 +23,7 @@ export default function App() {
       <Navigation />
       <main>
         <Hero />
+        <FeatureCarousel />
         <Features />
         <HowItWorks />
         <Gallery />
@@ -36,6 +39,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      <BottomCTA />
     </div>
   );
 }
