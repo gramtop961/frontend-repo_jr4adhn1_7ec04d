@@ -10,12 +10,12 @@ const screens = [
 
 export default function Gallery() {
   return (
-    <section className="py-20 bg-slate-50 dark:bg-slate-900">
+    <section className="py-20 bg-white dark:bg-neutral-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">Experience the app</h2>
-            <p className="mt-2 text-slate-600 dark:text-slate-300">Drag to explore interfaces crafted for speed and clarity.</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">Experience the app</h2>
+            <p className="mt-2 text-neutral-600 dark:text-neutral-300">Drag to explore interfaces crafted for speed and clarity.</p>
           </div>
         </div>
         <div className="mt-8 overflow-hidden">
@@ -30,7 +30,7 @@ export default function Gallery() {
                 src={src}
                 alt={`App screen ${i + 1}`}
                 loading="lazy"
-                className="h-80 w-56 sm:h-96 sm:w-64 object-cover rounded-3xl shadow-xl select-none"
+                className="h-80 w-56 sm:h-96 sm:w-64 object-cover rounded-3xl shadow-xl select-none border border-neutral-200 dark:border-white/10"
               />
             ))}
           </motion.div>
