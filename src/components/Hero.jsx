@@ -1,80 +1,44 @@
 import Spline from '@splinetool/react-spline';
-import { Sparkles } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 
 export default function Hero() {
-  const scrollToSeller = () => {
-    const el = document.getElementById('seller-apply');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   return (
-    <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-800">
-      {/* Spline scene at base layer */}
-      <div className="absolute inset-0 z-0">
-        <Spline
-          scene="https://prod.spline.design/igThmltzmqv5hkWo/scene.splinecode"
-          style={{ width: '100%', height: '100%' }}
-        />
+    <section className="relative min-h-[90vh] w-full grid place-items-center pt-16 overflow-hidden">
+      <div className="absolute inset-0">
+        <Spline scene="https://prod.spline.design/Qe6dlWJktclXcUBS/scene.splinecode" style={{ width: '100%', height: '100%' }} />
       </div>
 
-      {/* Gradient overlay above Spline, below content. Must not block pointer events */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-orange-500/20 via-green-500/15 to-blue-600/25 pointer-events-none mix-blend-overlay" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white/80 dark:from-slate-950/80 dark:via-slate-950/40 dark:to-slate-950/80" />
 
-      {/* Content on top so text is always visible */}
-      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 grid md:grid-cols-12 gap-8 items-center">
-        <div className="md:col-span-7 text-white">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs">
-            <Sparkles size={14} className="text-orange-300" /> Hyperlocal commerce, reimagined
-          </div>
-          <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            Buy and sell in your neighborhood — instantly
-          </h1>
-          <p className="mt-4 max-w-xl text-white/80 text-base sm:text-lg">
-            Helloo Local connects neighborhood sellers with nearby customers through a seamless, real‑time marketplace experience.
-          </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={scrollToSeller}
-              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600/50 focus:ring-offset-neutral-900"
-            >
-              Become a Seller
-            </button>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.example.helloolocal"
-              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-neutral-900 bg-white/90 hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600/50 focus:ring-offset-neutral-900"
-            >
-              Get the App
-            </a>
-          </div>
-          <div className="mt-8 flex items-center gap-6 text-sm text-white/70">
-            <div className="flex -space-x-2">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <img
-                  key={i}
-                  src={`https://i.pravatar.cc/100?img=${i + 5}`}
-                  alt="Happy customer avatar"
-                  className="h-8 w-8 rounded-full ring-2 ring-white/10 object-cover"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-            <p>Trusted by 2,000+ neighborhood sellers</p>
-          </div>
+      <div className="relative z-20 text-center px-6 sm:px-8 max-w-3xl">
+        <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium bg-white/70 dark:bg-slate-900/70 backdrop-blur border border-white/40 dark:border-slate-700">
+          <Star className="h-3.5 w-3.5 text-orange-500" />
+          <span className="text-slate-700 dark:text-slate-200">Festive Local: Saffron • Green • Royal Blue</span>
         </div>
-
-        <div className="md:col-span-5">
-          <div className="relative rounded-3xl bg-gradient-to-br from-orange-400/30 via-green-400/25 to-blue-500/30 p-1 shadow-2xl">
-            <div className="rounded-2xl bg-neutral-950/60 border border-white/10 p-4">
-              <img
-                src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop"
-                alt="Helloo Local app preview"
-                className="rounded-2xl shadow-2xl"
-                loading="lazy"
-              />
-            </div>
-          </div>
+        <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 bg-clip-text text-transparent">
+          Discover and Support Local Gems
+        </h1>
+        <p className="mt-4 text-base sm:text-lg text-slate-700 dark:text-slate-300">
+          A premium marketplace that connects you with authentic local sellers. Beautifully crafted, lightning fast, and mobile-first.
+        </p>
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href="#apply"
+            className="inline-flex items-center justify-center rounded-full px-5 py-3 text-white font-semibold bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-shadow"
+          >
+            Become a Seller
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </a>
+          <a
+            href="#features"
+            className="inline-flex items-center justify-center rounded-full px-5 py-3 font-semibold text-slate-800 dark:text-slate-200 bg-white/80 dark:bg-slate-900/80 backdrop-blur border border-white/50 dark:border-slate-700"
+          >
+            Explore Features
+          </a>
         </div>
       </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent via-white/40 to-white dark:via-slate-950/40 dark:to-slate-950" />
     </section>
   );
 }

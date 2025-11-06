@@ -1,69 +1,87 @@
 import { useState } from 'react';
-import { Rocket, Store, Download } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
 
-  const scrollToSeller = () => {
-    const el = document.getElementById('seller-apply');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  const navItems = [
+    { label: 'Features', href: '#features' },
+    { label: 'How it works', href: '#how' },
+    { label: 'Gallery', href: '#gallery' },
+  ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/70 dark:bg-neutral-900/70 border-b border-white/20">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-white/70 dark:bg-slate-900/60 border-b border-white/20 dark:border-slate-700/40">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-orange-500 via-green-500 to-blue-600 shadow-md grid place-items-center text-white">
-              <Store size={18} />
-            </div>
-            <span className="font-semibold tracking-tight text-neutral-900 dark:text-white">Helloo Local</span>
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-orange-500 via-green-500 to-blue-600 text-white shadow-lg shadow-blue-600/20">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <span className="font-semibold tracking-tight text-slate-900 dark:text-white">Helloo Local</span>
           </a>
 
-          <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={scrollToSeller}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 shadow-sm hover:shadow transition-shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600/50 focus:ring-offset-white dark:focus:ring-offset-neutral-900"
-              aria-label="Become a Seller"
-            >
-              <Rocket size={16} /> Become a Seller
-            </button>
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
             <a
-              href="https://play.google.com/store/apps/details?id=com.example.helloolocal"
-              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 dark:text-white dark:bg-blue-600/20 dark:hover:bg-blue-600/30 dark:border-blue-500/30"
-              aria-label="Get the App"
+              href="#apply"
+              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 shadow-lg shadow-blue-600/30 hover:shadow-blue-600/40 transition-shadow"
             >
-              <Download size={16} /> Get the App
+              Become a Seller
             </a>
-          </div>
+          </nav>
 
           <button
-            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-neutral-700 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800"
-            onClick={() => setOpen((s) => !s)}
-            aria-label="Toggle Menu"
+            aria-label="Open menu"
+            onClick={() => setOpen(true)}
+            className="md:hidden inline-flex items-center justify-center rounded-lg p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
+            <Menu className="h-6 w-6" />
           </button>
         </div>
-        {open && (
-          <div className="md:hidden pb-4 flex flex-col gap-2">
+      </div>
+
+      {open && (
+        <div className="md:hidden absolute inset-x-3 top-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 shadow-2xl border border-slate-200/60 dark:border-slate-700/60">
+          <div className="flex items-center justify-between px-4 py-3">
+            <span className="font-semibold text-slate-900 dark:text-white">Menu</span>
             <button
-              onClick={() => { setOpen(false); scrollToSeller(); }}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-orange-500 via-green-500 to-blue-600"
+              aria-label="Close menu"
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center justify-center rounded-lg p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
             >
-              <Rocket size={16} /> Become a Seller
+              <X className="h-6 w-6" />
             </button>
+          </div>
+          <div className="px-4 pb-4 space-y-2">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                {item.label}
+              </a>
+            ))}
             <a
-              href="https://play.google.com/store/apps/details?id=com.example.helloolocal"
-              className="w-full inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-blue-800 bg-blue-50 border border-blue-200 dark:text-white dark:bg-blue-600/20 dark:border-blue-500/30"
+              href="#apply"
+              onClick={() => setOpen(false)}
+              className="block text-center rounded-full px-4 py-3 font-semibold text-white bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 shadow-lg"
             >
-              <Download size={16} /> Get the App
+              Become a Seller
             </a>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
     </header>
   );
 }

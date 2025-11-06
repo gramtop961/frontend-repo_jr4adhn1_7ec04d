@@ -1,52 +1,41 @@
-import { Helmet } from 'react-helmet';
+import { useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
-import Gallery from './components/Gallery';
-import { TwinPaths, HowItWorks, Features, FAQs, Footer } from './components/Sections';
-import { SellerForm } from './components/Forms';
+import { Features, HowItWorks, Gallery, SellerApply } from './components/Sections';
 
 export default function App() {
-  const siteName = 'Helloo Local';
-  const title = 'Helloo Local — Hyperlocal marketplace for instant neighborhood buying and selling';
-  const description = 'Become a seller and reach nearby customers instantly. Discover local shops, fast delivery, and secure payments — all in one hyperlocal marketplace.';
-  const url = typeof window !== 'undefined' ? window.location.href : 'https://helloolocal.example';
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: siteName,
-    url,
-    sameAs: [
-      'https://www.instagram.com/',
-      'https://twitter.com/'
-    ],
-    logo: 'https://assets.website-files.com/img/logo.png'
-  };
+  useEffect(() => {
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      const m = document.createElement('meta');
+      m.setAttribute('name', 'theme-color');
+      m.setAttribute('content', '#0B57D0');
+      document.head.appendChild(m);
+    } else {
+      meta.setAttribute('content', '#0B57D0');
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 dark:bg-neutral-950 dark:text-white">
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={url} />
-        <meta name="theme-color" content="#0B57D0" />
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      </Helmet>
-
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <Navigation />
       <main>
         <Hero />
-        <TwinPaths />
-        <HowItWorks />
         <Features />
+        <HowItWorks />
         <Gallery />
-        <SellerForm />
-        <FAQs />
+        <SellerApply />
       </main>
-      <Footer />
+      <footer className="py-10 border-t border-slate-200/70 dark:border-slate-800">
+        <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-sm text-slate-600 dark:text-slate-400">© {new Date().getFullYear()} Helloo Local. All rights reserved.</p>
+          <div className="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+            <span className="inline-block h-2 w-2 rounded-full bg-orange-500" />
+            <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
+            <span className="inline-block h-2 w-2 rounded-full bg-blue-600" />
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
