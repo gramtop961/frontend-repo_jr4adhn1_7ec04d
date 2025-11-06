@@ -9,16 +9,19 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-800">
-      <div className="absolute inset-0">
+      {/* Spline scene at base layer */}
+      <div className="absolute inset-0 z-0">
         <Spline
           scene="https://prod.spline.design/igThmltzmqv5hkWo/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-fuchsia-500/20 via-amber-400/10 to-lime-400/20 mix-blend-overlay pointer-events-none" />
+      {/* Gradient overlay above Spline, below content. Must not block pointer events */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-fuchsia-500/20 via-amber-400/10 to-lime-400/20 pointer-events-none mix-blend-overlay" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 grid md:grid-cols-12 gap-8 items-center">
+      {/* Content on top so text is always visible */}
+      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 grid md:grid-cols-12 gap-8 items-center">
         <div className="md:col-span-7 text-white">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs">
             <Sparkles size={14} className="text-amber-300" /> Hyperlocal commerce, reimagined
@@ -33,6 +36,7 @@ export default function Hero() {
             <button
               onClick={scrollToSeller}
               className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-amber-400 to-lime-400 shadow-lg shadow-fuchsia-500/20 hover:shadow-fuchsia-500/30"
+            |
             >
               Become a Seller
             </button>

@@ -3,7 +3,10 @@
 > vite
 
 
-  VITE v5.4.20  ready in 254 ms
+  VITE v5.4.20  ready in 253 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.20.2.76:3000/
+12:45:10 AM [vite] Pre-transform error: Failed to resolve import "react-helmet" from "src/App.jsx". Does the file exist?
+12:45:10 AM [vite] Pre-transform error: Transform failed with 1 error:
+/home/workspace/src/components/Hero.jsx:39:12: ERROR: Expected ">" but found "|"
