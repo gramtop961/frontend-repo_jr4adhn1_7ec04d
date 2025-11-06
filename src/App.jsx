@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import { TwinPaths, HowItWorks, Features, Pricing, FAQs, Footer } from './components/Sections';
 import { SellerForm, CustomerCapture } from './components/Forms';
+import Gallery from './components/Gallery';
 
 const App = () => {
   React.useEffect(() => {
@@ -49,6 +50,7 @@ const App = () => {
         <TwinPaths />
         <HowItWorks />
         <Features />
+        <Gallery />
         <CustomerCapture />
         <Pricing />
         <SellerForm />
