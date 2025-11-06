@@ -18,13 +18,13 @@ export default function Hero() {
       </div>
 
       {/* Gradient overlay above Spline, below content. Must not block pointer events */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-fuchsia-500/20 via-amber-400/10 to-lime-400/20 pointer-events-none mix-blend-overlay" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-orange-500/20 via-green-500/15 to-blue-600/25 pointer-events-none mix-blend-overlay" />
 
       {/* Content on top so text is always visible */}
       <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 grid md:grid-cols-12 gap-8 items-center">
         <div className="md:col-span-7 text-white">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs">
-            <Sparkles size={14} className="text-amber-300" /> Hyperlocal commerce, reimagined
+            <Sparkles size={14} className="text-orange-300" /> Hyperlocal commerce, reimagined
           </div>
           <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
             Buy and sell in your neighborhood — instantly
@@ -35,14 +35,13 @@ export default function Hero() {
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <button
               onClick={scrollToSeller}
-              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-amber-400 to-lime-400 shadow-lg shadow-fuchsia-500/20 hover:shadow-fuchsia-500/30"
-            |
+              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600/50 focus:ring-offset-neutral-900"
             >
               Become a Seller
             </button>
             <a
               href="https://play.google.com/store/apps/details?id=com.example.helloolocal"
-              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-neutral-900 bg-white/90 hover:bg-white"
+              className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-neutral-900 bg-white/90 hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600/50 focus:ring-offset-neutral-900"
             >
               Get the App
             </a>
@@ -64,7 +63,7 @@ export default function Hero() {
         </div>
 
         <div className="md:col-span-5">
-          <div className="relative rounded-3xl bg-gradient-to-br from-fuchsia-400/30 via-amber-300/20 to-lime-300/30 p-1 shadow-2xl">
+          <div className="relative rounded-3xl bg-gradient-to-br from-orange-400/30 via-green-400/25 to-blue-500/30 p-1 shadow-2xl">
             <div className="rounded-2xl bg-neutral-950/60 border border-white/10 p-4">
               <img
                 src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop"

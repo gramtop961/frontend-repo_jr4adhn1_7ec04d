@@ -41,7 +41,7 @@ export function SellerForm() {
                 name="name"
                 value={form.name}
                 onChange={onChange}
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="Jane Doe"
                 required
               />
@@ -52,7 +52,7 @@ export function SellerForm() {
                 name="phone"
                 value={form.phone}
                 onChange={onChange}
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="+91 98765 43210"
                 required
               />
@@ -63,7 +63,7 @@ export function SellerForm() {
                 name="shop"
                 value={form.shop}
                 onChange={onChange}
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="Sunrise Grocers"
                 required
               />
@@ -74,7 +74,7 @@ export function SellerForm() {
                 name="city"
                 value={form.city}
                 onChange={onChange}
-                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+                className="mt-1 w-full rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 px-3 py-2 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
                 placeholder="Bengaluru"
                 required
               />
@@ -82,14 +82,14 @@ export function SellerForm() {
             <div className="sm:col-span-2 flex items-center justify-between gap-4 mt-2">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-amber-400 to-lime-400 shadow-lg"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-orange-500 via-green-500 to-blue-600 shadow-lg"
                 disabled={status.state === 'loading'}
               >
                 {status.state === 'loading' ? 'Submitting...' : 'Apply Now'}
               </button>
               {status.state !== 'idle' && (
                 <p className={
-                  status.state === 'success' ? 'text-lime-600 dark:text-lime-400 text-sm' : 'text-rose-600 dark:text-rose-400 text-sm'
+                  status.state === 'success' ? 'text-green-600 dark:text-green-400 text-sm' : 'text-rose-600 dark:text-rose-400 text-sm'
                 }>
                   {status.message}
                 </p>

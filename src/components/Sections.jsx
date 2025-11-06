@@ -6,25 +6,25 @@ export function TwinPaths() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-fuchsia-500/10 text-fuchsia-300 px-3 py-1 text-xs">
+            <div className="inline-flex items-center gap-2 rounded-full bg-orange-500/10 text-orange-300 px-3 py-1 text-xs">
               <Sparkles size={14} /> For Sellers
             </div>
             <h3 className="mt-3 text-2xl font-bold">Launch your local store in minutes</h3>
             <ul className="mt-4 space-y-3 text-white/80">
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-fuchsia-400 mt-1" size={18} /> Zero setup fees, instant onboarding</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-fuchsia-400 mt-1" size={18} /> Real‑time orders from nearby customers</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-fuchsia-400 mt-1" size={18} /> Integrated payments & doorstep delivery</li>
+              <li className="flex items-start gap-3"><CheckCircle2 className="text-green-400 mt-1" size={18} /> Zero setup fees, instant onboarding</li>
+              <li className="flex items-start gap-3"><CheckCircle2 className="text-green-400 mt-1" size={18} /> Real‑time orders from nearby customers</li>
+              <li className="flex items-start gap-3"><CheckCircle2 className="text-green-400 mt-1" size={18} /> Integrated payments & doorstep delivery</li>
             </ul>
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-lime-500/10 text-lime-300 px-3 py-1 text-xs">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-600/10 text-blue-300 px-3 py-1 text-xs">
               <Sparkles size={14} /> For Local Discovery
             </div>
             <h3 className="mt-3 text-2xl font-bold">Find nearby shops and deals instantly</h3>
             <ul className="mt-4 space-y-3 text-white/80">
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-lime-400 mt-1" size={18} /> Search hyperlocal inventory</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-lime-400 mt-1" size={18} /> Fast delivery or in‑store pickup</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-lime-400 mt-1" size={18} /> Trusted reviews from your neighborhood</li>
+              <li className="flex items-start gap-3"><CheckCircle2 className="text-blue-300 mt-1" size={18} /> Search hyperlocal inventory</li>
+              <li className="flex items-start gap-3"><CheckCircle2 className="text-blue-300 mt-1" size={18} /> Fast delivery or in‑store pickup</li>
+              <li className="flex items-start gap-3"><CheckCircle2 className="text-blue-300 mt-1" size={18} /> Trusted reviews from your neighborhood</li>
             </ul>
           </div>
         </div>
@@ -48,7 +48,7 @@ export function HowItWorks() {
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map(({ icon: Icon, title, desc }) => (
             <div key={title} className="rounded-2xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-800 p-6 shadow-sm">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-fuchsia-400 via-amber-300 to-lime-300 text-neutral-900 grid place-items-center mb-4">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-orange-400 via-green-400 to-blue-600 text-white grid place-items-center mb-4">
                 <Icon size={20} />
               </div>
               <h3 className="font-semibold text-neutral-900 dark:text-white">{title}</h3>
@@ -73,7 +73,7 @@ export function Features() {
         <div className="grid md:grid-cols-3 gap-6">
           {features.map(({ title, desc, icon: Icon }) => (
             <div key={title} className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl">
-              <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-fuchsia-400 via-amber-300 to-lime-300 grid place-items-center text-neutral-900 mb-4">
+              <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-orange-400 via-green-400 to-blue-600 grid place-items-center text-white mb-4">
                 <Icon size={22} />
               </div>
               <h3 className="text-xl font-semibold">{title}</h3>
