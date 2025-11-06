@@ -4,6 +4,10 @@ import Hero from './components/Hero';
 import { Features, HowItWorks, Gallery, SellerApply } from './components/Sections';
 import FeatureCarousel from './components/FeatureCarousel';
 import BottomCTA from './components/BottomCTA';
+import Comparison from './components/Comparison';
+import AppScreens from './components/AppScreens';
+import PlacementRoadmap from './components/PlacementRoadmap';
+import OrangeThemeTuner from './components/OrangeThemeTuner';
 
 export default function App() {
   useEffect(() => {
@@ -11,10 +15,10 @@ export default function App() {
     if (!meta) {
       const m = document.createElement('meta');
       m.setAttribute('name', 'theme-color');
-      m.setAttribute('content', '#0B57D0');
+      m.setAttribute('content', '#ea580c'); // orange-600
       document.head.appendChild(m);
     } else {
-      meta.setAttribute('content', '#0B57D0');
+      meta.setAttribute('content', '#ea580c');
     }
   }, []);
 
@@ -22,10 +26,15 @@ export default function App() {
     <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <Navigation />
       <main>
+        {/* Stronger orange-first readability */}
         <Hero />
+        <OrangeThemeTuner />
         <FeatureCarousel />
         <Features />
+        <Comparison />
         <HowItWorks />
+        <AppScreens />
+        <PlacementRoadmap />
         <Gallery />
         <SellerApply />
       </main>
